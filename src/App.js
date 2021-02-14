@@ -131,8 +131,12 @@ class App extends Component {
   }
 
   onRouteChange = (route) =>{
+    console.log(route);
     if(route=='signout'){
       this.setState({isSignedIn:false});
+      this.onRouteChange('signin')
+      return;
+      
     }else if(route==='home'){
       this.setState({isSignedIn:true});
     }
@@ -163,7 +167,7 @@ class App extends Component {
             </div>   
 
             : (
-               route === 'signin' ?
+               route === 'signin' && isSignedIn===false ?
                 <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
                 : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
             )   
